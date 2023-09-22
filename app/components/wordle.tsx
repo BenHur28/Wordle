@@ -22,9 +22,16 @@ const Wordle = () => {
 
 	return (
 		<div>
-			{guess.map((char, i) => (
-				<span key={i}>{char}</span>
-			))}
+			<div className="flex mt-10 gap-x-2">
+				{guess.map((char, i) => (
+					<span
+						className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
+						key={i}
+					>
+						{char}
+					</span>
+				))}
+			</div>
 		</div>
 	);
 };
