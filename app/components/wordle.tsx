@@ -6,6 +6,11 @@ const Wordle = () => {
 
 	useEffect(() => {
 		const handleKeyDown = ({ key }: { key: string }) => {
+			if (guess.length == 5) {
+				if (key === "Enter") {
+					console.log(guess);
+				}
+			}
 			if (key === "Backspace") {
 				setGuess((prev) => {
 					const temp = [...prev];
@@ -25,7 +30,7 @@ const Wordle = () => {
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [guess.length]);
+	}, [guess, guess.length]);
 
 	return (
 		<div>
