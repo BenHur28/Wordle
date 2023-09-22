@@ -30,12 +30,12 @@ const Wordle = () => {
 	return (
 		<div>
 			<div className="flex mt-10 gap-x-2">
-				{guess.map((char, i) => (
+				{Array.from({ length: 5 }).map((_, i) => (
 					<span
 						className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
 						key={i}
 					>
-						{char}
+						{guess[i] || ""}
 					</span>
 				))}
 			</div>
