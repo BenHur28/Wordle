@@ -6,8 +6,15 @@ const Wordle = () => {
 
 	useEffect(() => {
 		const handleKeyDown = ({ key }: { key: string }) => {
+			if (key === "Backspace") {
+				setGuess((prev) => {
+					const temp = [...prev];
+					temp.pop();
+					return temp;
+				});
+			}
 			if (guess.length < 5) {
-				const isChar = /[a-z]/.test(key);
+				const isChar = /^[a-z]$/.test(key);
 				if (isChar) {
 					setGuess((prev) => [...prev, key]);
 				}
