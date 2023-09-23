@@ -2,13 +2,18 @@
 import { useState, useEffect } from "react";
 
 const Wordle = () => {
+	const word = "bread";
+	const answer = word.split("");
+	const [submittedGuesses, setSubmittedGuesses] = useState<string[][]>([]);
 	const [guess, setGuess] = useState<Array<string>>([]);
 
 	useEffect(() => {
 		const handleKeyDown = ({ key }: { key: string }) => {
 			if (guess.length == 5) {
 				if (key === "Enter") {
-					console.log(guess);
+					setSubmittedGuesses((prev) => [...prev, guess]);
+					setGuess([]);
+					console.log(submittedGuesses);
 				}
 			}
 			if (key === "Backspace") {
@@ -30,7 +35,7 @@ const Wordle = () => {
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [guess, guess.length]);
+	}, [guess, guess.length, submittedGuesses]);
 
 	return (
 		<div>
