@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 
+const totalGuessMax = 6;
+
 const Wordle = () => {
 	const word = "bread";
 	const answer = word.split("");
@@ -35,11 +37,11 @@ const Wordle = () => {
 
 	console.log(submittedGuesses);
 
-	const CurrentGuess = () => {};
+	type CurrentGuessProps = {
+		guess: string[];
+	};
 
-	const PreviousGuess = () => {};
-
-	const EmptyGuess = () => {
+	const CurrentGuess = ({ guess }: CurrentGuessProps) => {
 		return (
 			<div className="flex gap-x-2 mb-2">
 				{Array.from({ length: 5 }).map((_, i) => (
@@ -54,10 +56,28 @@ const Wordle = () => {
 		);
 	};
 
+	const PreviousGuess = () => {};
+
+	const EmptyGuess = () => {
+		return (
+			<div className="flex gap-x-2 mb-2">
+				{Array.from({ length: 5 }).map((_, i) => (
+					<span
+						className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
+						key={i}
+					></span>
+				))}
+			</div>
+		);
+	};
+
 	return (
 		<div>
 			<div className="mt-10">
-				{Array.from({ length: 6 - submittedGuesses.length }).map((_, i) => (
+				<CurrentGuess guess={guess} />
+				{Array.from({
+					length: totalGuessMax - submittedGuesses.length - 1,
+				}).map((_, i) => (
 					<EmptyGuess key={i} />
 				))}
 			</div>
