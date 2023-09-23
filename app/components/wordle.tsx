@@ -4,7 +4,11 @@ import { CurrentGuess, EmptyGuess, SubmittedGuesses } from "./Guesses";
 
 const totalGuessMax = 6;
 
-const Wordle = () => {
+type WordleProps = {
+	wordOfDay: string;
+};
+
+const Wordle = ({ wordOfDay }: WordleProps) => {
 	const [submittedGuesses, setSubmittedGuesses] = useState<string[][]>([]);
 	const [guess, setGuess] = useState<Array<string>>([]);
 
@@ -36,13 +40,20 @@ const Wordle = () => {
 
 	console.log(submittedGuesses);
 
+	const isCorrect =
+		submittedGuesses.length > 0 &&
+		submittedGuesses[submittedGuesses.length - 1].join("") === wordOfDay;
+
 	return (
 		<div>
 			<div className="mt-10">
-				<SubmittedGuesses submittedGuesses={submittedGuesses} />
-				<CurrentGuess guess={guess} />
+				<SubmittedGuesses
+					submittedGuesses={submittedGuesses}
+					wordOfDay={wordOfDay}
+				/>
+				{!isCorrect && <CurrentGuess guess={guess} />}
 				{Array.from({
-					length: totalGuessMax - submittedGuesses.length - 1,
+					length: totalGuessMax - submittedGuesses.length - (isCorrect ? 0 : 1),
 				}).map((_, i) => (
 					<EmptyGuess key={i} />
 				))}

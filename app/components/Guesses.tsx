@@ -1,5 +1,12 @@
+import { cn } from "@/lib/utils";
+
 type CurrentGuessProps = {
 	guess: string[];
+};
+
+type SubmittedGuessesProps = {
+	submittedGuesses: string[][];
+	wordOfDay: string;
 };
 
 const CurrentGuess = ({ guess }: CurrentGuessProps) => {
@@ -17,11 +24,13 @@ const CurrentGuess = ({ guess }: CurrentGuessProps) => {
 	);
 };
 
-type SubmittedGuessesProps = {
-	submittedGuesses: string[][];
-};
-
-const SubmittedGuesses = ({ submittedGuesses }: SubmittedGuessesProps) => {
+const SubmittedGuesses = ({
+	submittedGuesses,
+	wordOfDay,
+}: SubmittedGuessesProps) => {
+	const isCorrect =
+		submittedGuesses.length > 0 &&
+		submittedGuesses[submittedGuesses.length - 1].join("") === wordOfDay;
 	return (
 		<>
 			{submittedGuesses.map((guess, i) => {
@@ -36,7 +45,9 @@ const GuessRow = ({ guess }: CurrentGuessProps) => {
 		<div className="flex gap-x-2 mb-2">
 			{Array.from({ length: 5 }).map((_, i) => (
 				<span
-					className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
+					className={cn(
+						"flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
+					)}
 					key={i}
 				>
 					{guess[i]}
