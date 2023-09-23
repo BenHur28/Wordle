@@ -38,11 +38,11 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 		};
 	}, [guess, guess.length]);
 
-	console.log(submittedGuesses);
-
 	const isCorrect =
 		submittedGuesses.length > 0 &&
 		submittedGuesses[submittedGuesses.length - 1].join("") === wordOfDay;
+
+	const failed = !isCorrect && submittedGuesses.length === totalGuessMax;
 
 	const charMap = useMemo(() => {
 		return wordOfDay.split("").reduce<Record<string, number>>((acc, char) => {
@@ -63,7 +63,7 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 					wordOfDay={wordOfDay}
 					charMap={charMap}
 				/>
-				{!isCorrect && (
+				{!isCorrect && !failed && (
 					<CurrentGuess guess={guess} wordOfDay={wordOfDay} charMap={charMap} />
 				)}
 				{Array.from({
@@ -71,6 +71,10 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 				}).map((_, i) => (
 					<EmptyGuess key={i} />
 				))}
+				{isCorrect && <div className="text-2xl text-center">You won!</div>}
+				{failed && (
+					<div className="text-2xl text-center">Try again next time</div>
+				)}
 			</div>
 		</div>
 	);
