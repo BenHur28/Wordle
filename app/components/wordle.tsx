@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { CurrentGuess, EmptyGuess, SubmittedGuesses } from "./Guesses";
 
 const totalGuessMax = 6;
@@ -44,14 +44,28 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 		submittedGuesses.length > 0 &&
 		submittedGuesses[submittedGuesses.length - 1].join("") === wordOfDay;
 
+	const charMap = useMemo(() => {
+		return wordOfDay.split("").reduce<Record<string, number>>((acc, char) => {
+			if (!acc.hasOwnProperty(char)) {
+				acc[char] = 1;
+			} else {
+				acc[char] += 1;
+			}
+			return acc;
+		}, {});
+	}, [wordOfDay]);
+
 	return (
 		<div>
 			<div className="mt-10">
 				<SubmittedGuesses
 					submittedGuesses={submittedGuesses}
 					wordOfDay={wordOfDay}
+					charMap={charMap}
 				/>
-				{!isCorrect && <CurrentGuess guess={guess} />}
+				{!isCorrect && (
+					<CurrentGuess guess={guess} wordOfDay={wordOfDay} charMap={charMap} />
+				)}
 				{Array.from({
 					length: totalGuessMax - submittedGuesses.length - (isCorrect ? 0 : 1),
 				}).map((_, i) => (
