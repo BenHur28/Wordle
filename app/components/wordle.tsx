@@ -9,33 +9,31 @@ const Wordle = () => {
 
 	useEffect(() => {
 		const handleKeyDown = ({ key }: { key: string }) => {
-			if (guess.length == 5) {
-				if (key === "Enter") {
-					setSubmittedGuesses((prev) => [...prev, guess]);
-					setGuess([]);
-					console.log(submittedGuesses);
-				}
-			}
-			if (key === "Backspace") {
+			const isChar = /^[a-z]$/.test(key);
+			const isBackspace = key === "Backspace";
+			const isEnter = key === "Enter";
+			const isGuessFinished = guess.length === 5;
+
+			if (isBackspace) {
 				setGuess((prev) => {
 					const temp = [...prev];
 					temp.pop();
 					return temp;
 				});
-			}
-			if (guess.length < 5) {
-				const isChar = /^[a-z]$/.test(key);
-				if (isChar) {
-					setGuess((prev) => [...prev, key]);
-				}
+			} else if (isChar && !isGuessFinished) {
+				setGuess((prev) => [...prev, key]);
+			} else if (isGuessFinished && isEnter) {
+				setSubmittedGuesses((prev) => [...prev, guess]);
+				setGuess([]);
 			}
 		};
 		window.addEventListener("keydown", handleKeyDown);
-
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [guess, guess.length, submittedGuesses]);
+	}, [guess, guess.length]);
+
+	console.log(submittedGuesses);
 
 	return (
 		<div>
