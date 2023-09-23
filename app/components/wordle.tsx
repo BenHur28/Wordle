@@ -35,9 +35,13 @@ const Wordle = () => {
 
 	console.log(submittedGuesses);
 
-	return (
-		<div>
-			<div className="flex mt-10 gap-x-2">
+	const CurrentGuess = () => {};
+
+	const PreviousGuess = () => {};
+
+	const EmptyGuess = () => {
+		return (
+			<div className="flex gap-x-2 mb-2">
 				{Array.from({ length: 5 }).map((_, i) => (
 					<span
 						className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
@@ -45,6 +49,16 @@ const Wordle = () => {
 					>
 						{guess[i] || ""}
 					</span>
+				))}
+			</div>
+		);
+	};
+
+	return (
+		<div>
+			<div className="mt-10">
+				{Array.from({ length: 6 - submittedGuesses.length }).map((_, i) => (
+					<EmptyGuess key={i} />
 				))}
 			</div>
 		</div>
