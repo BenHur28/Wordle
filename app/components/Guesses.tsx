@@ -17,7 +17,7 @@ const CurrentGuess = ({ guess }: CurrentGuessProps) => {
 		<div className="flex gap-x-2 mb-2">
 			{Array.from({ length: 5 }).map((_, i) => (
 				<span
-					className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
+					className="text-white flex justify-center items-center border-2 border-[#3a3a3c] text-4xl h-16 w-16"
 					key={i}
 				>
 					{guess[i]?.toLocaleUpperCase() || ""}
@@ -70,9 +70,9 @@ const GuessRow = ({ guess, wordOfDay, charMap }: CurrentGuessProps) => {
 				return (
 					<span
 						className={cn(
-							"flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16",
-							isCorrect ? "bg-green-800" : "",
-							isPresent ? "bg-yellow-500" : ""
+							"text-white bg-[#3a3a3c] flex justify-center items-center border-2 border-[#3a3a3c] text-4xl h-16 w-16",
+							isCorrect ? "bg-[#538d4e] border-0" : "",
+							isPresent ? "bg-[#B59F3B] border-0" : ""
 						)}
 						key={i}
 					>
@@ -89,7 +89,7 @@ const EmptyGuess = () => {
 		<div className="flex gap-x-2 mb-2">
 			{Array.from({ length: 5 }).map((_, i) => (
 				<span
-					className="flex justify-center items-center border-2 border-solid-black text-4xl h-16 w-16"
+					className="flex justify-center items-center border-2 border-[#3a3a3c] text-4xl h-16 w-16"
 					key={i}
 				></span>
 			))}

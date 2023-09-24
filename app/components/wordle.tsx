@@ -71,9 +71,13 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 				}).map((_, i) => (
 					<EmptyGuess key={i} />
 				))}
-				{isCorrect && <div className="text-2xl text-center">You won!</div>}
+				{isCorrect && (
+					<div className="text-2xl text-center text-white">You won!</div>
+				)}
 				{failed && (
-					<div className="text-2xl text-center">Try again next time</div>
+					<div className="text-2xl text-center text-white">
+						Try again next time
+					</div>
 				)}
 			</div>
 		</div>
