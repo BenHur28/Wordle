@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 
 type KeyPressHandlerType = (key: string) => void;
@@ -13,7 +14,16 @@ type KeyProps = {
 };
 
 const Key = ({ keyName, keyPressHandler, small }: KeyProps) => {
-	return <span>{keyName}</span>;
+	return (
+		<span
+			className={cn(
+				"flex justify-center items-center text-white bg-[#818384] rounded-sm cursor-pointer mx-0.5 h-12 w-12",
+				small ? "text-2xl" : "text-lg"
+			)}
+		>
+			{keyName.toLocaleUpperCase()}
+		</span>
+	);
 };
 
 const Keyboard = ({ keyPressHandler }: KeyboardProps) => {
@@ -25,7 +35,13 @@ const Keyboard = ({ keyPressHandler }: KeyboardProps) => {
 		});
 	}, [keyPressHandler]);
 
-	return <div>{top}</div>;
+	return (
+		<div className="mt-10">
+			<div className="flex justify-center mb-2">{top}</div>
+			<div className="flex justify-center mb-2">{top}</div>
+			<div className="flex justify-center">{top}</div>
+		</div>
+	);
 };
 
 export default Keyboard;
