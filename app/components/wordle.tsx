@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { CurrentGuess, EmptyGuess, SubmittedGuesses } from "./Guesses";
+import Keyboard from "./keyboard";
 
 const totalGuessMax = 6;
 
@@ -12,8 +13,8 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 	const [submittedGuesses, setSubmittedGuesses] = useState<string[][]>([]);
 	const [guess, setGuess] = useState<Array<string>>([]);
 
-	useEffect(() => {
-		const handleKeyDown = ({ key }: { key: string }) => {
+	const handleKeyInput = useCallback(
+		(key: string) => {
 			const isChar = /^[a-z]$/.test(key);
 			const isBackspace = key === "Backspace";
 			const isEnter = key === "Enter";
@@ -31,12 +32,19 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 				setSubmittedGuesses((prev) => [...prev, guess]);
 				setGuess([]);
 			}
+		},
+		[guess]
+	);
+
+	useEffect(() => {
+		const handleKeyDown = ({ key }: { key: string }) => {
+			handleKeyInput(key);
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [guess, guess.length]);
+	}, [guess, guess.length, handleKeyInput]);
 
 	const isCorrect =
 		submittedGuesses.length > 0 &&
@@ -79,6 +87,7 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 						Try again next time
 					</div>
 				)}
+				<Keyboard keyPressHandler={handleKeyInput} />
 			</div>
 		</div>
 	);
