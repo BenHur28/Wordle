@@ -18,8 +18,9 @@ const Key = ({ keyName, keyPressHandler, small }: KeyProps) => {
 		<span
 			className={cn(
 				"flex justify-center items-center text-white bg-[#818384] rounded-sm cursor-pointer mx-0.5 h-12 w-12",
-				small ? "text-base px-20" : "text-xl"
+				small ? "text-base px-10" : "text-xl"
 			)}
+			onClick={() => keyPressHandler(keyName)}
 		>
 			{keyName.toLocaleUpperCase()}
 		</span>
@@ -62,7 +63,7 @@ const Keyboard = ({ keyPressHandler }: KeyboardProps) => {
 				small
 				keyPressHandler={keyPressHandler}
 				key="Backspace"
-				keyName="Backspace"
+				keyName="Back"
 			/>
 		);
 		return [enterKey, ...letters, backspaceKey];
