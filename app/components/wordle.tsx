@@ -64,7 +64,7 @@ const Wordle = ({ wordOfDay }: WordleProps) => {
 	}, [wordOfDay]);
 
 	return (
-		<div>
+		<div data-testid="wordle">
 			<div className="flex flex-col items-center mt-10">
 				<SubmittedGuesses
 					submittedGuesses={submittedGuesses}

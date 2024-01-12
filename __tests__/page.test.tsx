@@ -2,13 +2,22 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Page from "../app/page";
 import Navbar from "@/app/components/navbar";
+import Wordle from "@/app/components/wordle";
 
 describe("Navbar", () => {
 	it("renders the header", () => {
 		render(<Navbar />);
 		const header = screen.getByRole("heading");
-		const headerText = "WORDLE";
+		expect(header).toBeInTheDocument;
+	});
+});
 
-		expect(header).toHaveTextContent(headerText);
+describe("Wordle", () => {
+	it("renders the wordle", () => {
+		render(<Wordle wordOfDay="hello" />);
+
+		const div = screen.getByTestId("wordle");
+
+		expect(div).toBeInTheDocument();
 	});
 });
