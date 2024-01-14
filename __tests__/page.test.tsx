@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Navbar from "@/app/components/navbar";
 import Wordle from "@/app/components/wordle";
+import Keyboard from "@/app/components/keyboard";
 
 describe("Navbar", () => {
 	it("renders the header", () => {
@@ -22,3 +23,17 @@ describe("Wordle", () => {
 		expect(div).toBeInTheDocument();
 	});
 });
+
+describe("Keyboard", () => {
+	it("renders the keyboard", () => {
+		render(<Keyboard keyPressHandler={handleKeyInput} />);
+
+		const div = screen.getByTestId("keyboard");
+
+		expect(div).toBeInTheDocument();
+	});
+});
+
+function handleKeyInput(key: string): void {
+	throw new Error("Function not implemented.");
+}

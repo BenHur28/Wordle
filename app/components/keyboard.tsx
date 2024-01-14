@@ -70,7 +70,7 @@ const Keyboard = ({ keyPressHandler }: KeyboardProps) => {
 	}, [keyPressHandler]);
 
 	return (
-		<div className="mt-10">
+		<div data-testid="keyboard " className="mt-10">
 			<div className="flex justify-center mb-2">{top}</div>
 			<div className="flex justify-center mb-2">{middle}</div>
 			<div className="flex justify-center">{bottom}</div>
