@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import Navbar from "@/app/components/navbar";
 import Wordle from "@/app/components/wordle";
 import Keyboard from "@/app/components/keyboard";
+import { EmptyGuess } from "@/app/components/Guesses";
 
 describe("Navbar", () => {
 	it("renders the header", () => {
@@ -37,3 +38,13 @@ describe("Keyboard", () => {
 function handleKeyInput(key: string): void {
 	throw new Error("Function not implemented.");
 }
+
+describe("Empty Guess", () => {
+	it("renders the empty guesses", () => {
+		render(<EmptyGuess />);
+
+		const div = screen.getByTestId("empty");
+
+		expect(div).toBeInTheDocument();
+	});
+});
