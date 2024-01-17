@@ -4,6 +4,7 @@ import Navbar from "@/app/components/navbar";
 import Wordle from "@/app/components/wordle";
 import Keyboard from "@/app/components/keyboard";
 import { EmptyGuess } from "@/app/components/Guesses";
+import { CurrentGuess } from "@/app/components/Guesses";
 
 describe("Navbar", () => {
 	it("renders the header", () => {
@@ -46,5 +47,22 @@ describe("Empty Guess", () => {
 		const div = screen.getByTestId("empty");
 
 		expect(div).toBeInTheDocument();
+	});
+});
+
+describe("Current Guess", () => {
+	it("renders the current guess", () => {
+		const word = "hello";
+		const charMap = word
+			.split("")
+			.reduce<Record<string, number>>((acc, char) => {
+				if (!acc.hasOwnProperty(char)) {
+					acc[char] = 1;
+				} else {
+					acc[char] += 1;
+				}
+				return acc;
+			}, {});
+		render(<CurrentGuess guess={[]} wordOfDay={""} charMap={charMap} />);
 	});
 });
