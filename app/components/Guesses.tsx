@@ -14,7 +14,7 @@ type SubmittedGuessesProps = {
 
 const CurrentGuess = ({ guess }: CurrentGuessProps) => {
 	return (
-		<div className="flex gap-x-2 mb-2">
+		<div data-testid="current" className="flex gap-x-2 mb-2">
 			{Array.from({ length: 5 }).map((_, i) => (
 				<span
 					className="text-white flex justify-center items-center border-2 border-[#3a3a3c] text-4xl h-16 w-16"

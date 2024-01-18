@@ -66,6 +66,10 @@ describe("Current Guess", () => {
 				return acc;
 			}, {});
 		render(<CurrentGuess guess={[]} wordOfDay={""} charMap={charMap} />);
+
+		const div = screen.getByTestId("current");
+
+		expect(div).toBeInTheDocument();
 	});
 });
 
