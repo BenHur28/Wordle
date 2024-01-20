@@ -6,7 +6,6 @@ import Keyboard from "@/app/components/keyboard";
 import { EmptyGuess } from "@/app/components/Guesses";
 import { CurrentGuess } from "@/app/components/Guesses";
 import { SubmittedGuesses } from "@/app/components/Guesses";
-import { Charm } from "next/font/google";
 
 describe("Navbar", () => {
 	it("renders the header", () => {
