@@ -11,9 +11,12 @@ describe("Navbar", () => {
 	it("renders the header", () => {
 		render(<Navbar />);
 
+		const mainDiv = screen.getByRole("main-div");
+
 		const header = screen.getByRole("heading");
 
 		expect(header).toBeInTheDocument;
+		expect(mainDiv).toBeInTheDocument;
 	});
 });
 

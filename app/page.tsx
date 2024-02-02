@@ -15,7 +15,10 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="h-100 w-100 flex flex-col justify-center items-center">
+		<div
+			data-testid="main-div"
+			className="h-100 w-100 flex flex-col justify-center items-center"
+		>
 			<Navbar />
 			<Wordle wordOfDay={wordOfDay} />
 		</div>
